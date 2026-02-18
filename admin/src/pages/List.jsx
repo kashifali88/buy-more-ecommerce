@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { backendUrl } from "../App"
 import { toast } from 'react-toastify'
 import { currency } from "../App"
 
 
 const List = ({ token }) => {
+  const API = import.meta.env.VITE_BACKEND_URL;
+
   const [list, setList] = useState([])
 
 
   const fetchList = async () => {
     try {
-      const response = await axios.get(backendUrl + '/api/product/list')
+      const response = await axios.get(`${API}/api/product/list`)
       if (response.data.success) {
         setList(response.data.products)
 

@@ -1,11 +1,13 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import axios from 'axios'
-import { backendUrl, currency } from '../App'
+import {  currency } from '../App'
 import { toast } from "react-toastify"
 import { assets } from "../assets/assets"
 
 const Orders = ({ token }) => {
+  const API = import.meta.env.VITE_BACKEND_URL;
+
   const [orders, setOrders] = useState([])
 
   const fetchAllOrders = async () => {
@@ -13,7 +15,7 @@ const Orders = ({ token }) => {
       return null
     }
     try {
-const response = await axios.post(`${backendUrl}/api/orders/list`, {}, {headers: {Authorization: `Bearer ${token}`} })
+const response = await axios.post(`${API}/api/orders/list`, {}, {headers: {Authorization: `Bearer ${token}`} })
     if (response.data.success) {
       setOrders(response.data.orders)
     }
@@ -31,7 +33,7 @@ const response = await axios.post(`${backendUrl}/api/orders/list`, {}, {headers:
   }
   const statusHandler = async (e, orderId) => {
 try {
-  const response = await axios.post(`${backendUrl}/api/orders/status`, {orderId, status: e.target.value}, {headers: {Authorization:  `Bearer ${token}`}})
+  const response = await axios.post(`${API}/api/orders/status`, {orderId, status: e.target.value}, {headers: {Authorization:  `Bearer ${token}`}})
 await fetchAllOrders()
 
 } catch (error) {

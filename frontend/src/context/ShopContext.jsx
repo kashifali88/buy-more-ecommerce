@@ -9,13 +9,14 @@ const ShopContextProvider = (props) => {
 
   const currency = "$";
   const delievery_fee = 10;
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
   const navigate = useNavigate();
+  const API = import.meta.env.VITE_BACKEND_URL;
+
 
   // ------------------ CART FUNCTIONS ------------------
   const addToCart = async (itemId, size) => {
@@ -41,7 +42,7 @@ const ShopContextProvider = (props) => {
     if (token) {
       try {
         const res = await axios.post(
-          `${backendUrl}/api/cart/add`,
+          `${API}/api/cart/add`,
           { itemId, size },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -76,7 +77,7 @@ const ShopContextProvider = (props) => {
     if (token) {
       try {
         const res = await axios.post(
-          `${backendUrl}/api/cart/update`,
+          `${API}/api/cart/update`,
           { itemId, size, quantity },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -106,7 +107,7 @@ const ShopContextProvider = (props) => {
   // ------------------ API CALLS ------------------
   const getProductsData = async () => {
     try {
-      const response = await axios.get(`${backendUrl}/api/product/list`);
+      const response = await axios.get(`${API}/api/product/list`);
       if (response.data.success) {
         setProducts(response.data.products);
       } else {
@@ -121,7 +122,7 @@ const ShopContextProvider = (props) => {
   const getUserCart = async (token) => {
     try {
       const response = await axios.post(
-        `${backendUrl}/api/cart/get`,
+        `${API}/api/cart/get`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -178,7 +179,6 @@ useEffect(() => {
     updateQuantity,
     getCartAmount,
     navigate,
-    backendUrl,
     token,
     setToken,
     setCartItems

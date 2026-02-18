@@ -24,7 +24,9 @@ app.use(express.json());
 app.use(cors({
   origin: [
     "https://your-frontend.onrender.com",
-    "https://your-admin.onrender.com"
+    "https://your-admin.onrender.com",
+     "http://localhost:5173",
+     "http://localhost:5174"
   ],
   credentials: true
 }));

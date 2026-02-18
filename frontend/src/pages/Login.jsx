@@ -4,17 +4,19 @@ import axios from "axios"
 import { toast } from "react-toastify"
 
 const Login = () => {
-  const { token, setToken, navigate, backendUrl} = useContext(ShopContext)
+  const { token, setToken, navigate} = useContext(ShopContext)
   const [currentState, setCurrentState] = useState('Login')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const API = import.meta.env.VITE_BACKEND_URL;
+
 
   const submitHandler = async (event) => {
   event.preventDefault();
   try {
     if (currentState === 'Sign Up') {
-      const response = await axios.post(`${backendUrl}/api/user/register`, { name, email, password });
+      const response = await axios.post(`${API}/api/user/register`, { name, email, password });
       
      
       if (response.data.success) {
@@ -27,7 +29,7 @@ const Login = () => {
       }
 
     } else {
-      const response = await axios.post(`${backendUrl}/api/user/login`, { email, password });
+      const response = await axios.post(`${API}/api/user/login`, { email, password });
       
     
       if (response.data.success) {

@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { assets } from "../assets/assets"
 import axios from 'axios'
-import { backendUrl } from "../App"
 import { toast } from 'react-toastify'
 
 const Add =  ({token}) => {
+const API = import.meta.env.VITE_BACKEND_URL;
+
   const [image1, setImage1] = useState(false)
   const [image2, setImage2] = useState(false)
   const [image3, setImage3] = useState(false)
@@ -38,7 +39,7 @@ const Add =  ({token}) => {
        image4 && formData.append("image4",image4)
 
        const response = await axios.post(
-  `${backendUrl}/api/product/add`,
+  `${API}/api/product/add`,
   formData,
   {
     headers: {

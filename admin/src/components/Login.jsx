@@ -1,17 +1,17 @@
 import { useState } from "react"
-import { backendUrl } from "../App"
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const Login = ({ setToken,  }) => {
+    const API = import.meta.env.VITE_BACKEND_URL;
+
  const [email,setEmail] = useState('')
         const [password,setPassword] = useState('')
     const submitHandler = async (e) => {
        
         try {
             e.preventDefault()
-            console.log(email,password);
-            const response = await axios.post(backendUrl + '/api/user/admin', {email,password})
+            const response = await axios.post(`${API}/api/user/admin`, {email,password})
             console.log("Login response:", response.data); 
             
             if (response.data.success) {

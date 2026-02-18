@@ -7,8 +7,10 @@ import { ShopContext } from "../context/ShopContext"
 import axios from "axios"
 import { toast } from "react-toastify"
 const PlaceOrder = () => {
+  const API = import.meta.env.VITE_BACKEND_URL;
+
   const [method, setMethod] = useState('cod'); 
-  const {navigate, token, backendUrl, cartItems, setCartItems, getCartAmount, delievery_fee, products} = useContext(ShopContext);
+  const {navigate, token, cartItems, setCartItems, getCartAmount, delievery_fee, products} = useContext(ShopContext);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -52,7 +54,7 @@ const PlaceOrder = () => {
       switch (method) {
         // API calls for COD
           case 'cod':
-            const response = await axios.post(`${backendUrl}/api/order/place`,orderData,  { headers: { Authorization: `Bearer ${token}` } } )
+            const response = await axios.post(`${API}/api/order/place`,orderData,  { headers: { Authorization: `Bearer ${token}` } } )
             if (response.data.success){
               setCartItems({})
               navigate('/orders')
