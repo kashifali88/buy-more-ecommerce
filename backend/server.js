@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import connectDb from "./config/mongodb.js";
 import userRouter from "./routes/userRoutes.js";  
 import productRouter from "./routes/productRoute.js";
-import connectCloudinary from '../backend/config/cloudinary.js'
+import connectCloudinary from './config/cloudinary.js'
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 
@@ -21,7 +21,13 @@ connectCloudinary();
 
 // middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://your-frontend.onrender.com",
+    "https://your-admin.onrender.com"
+  ],
+  credentials: true
+}));
 
 // api end points
 app.use("/api/user", userRouter);
