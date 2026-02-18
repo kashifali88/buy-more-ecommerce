@@ -27,7 +27,8 @@ app.use(cors({
     "https://your-admin.onrender.com",
      "http://localhost:5173",
      "http://localhost:5174",
-     "https://buy-more-ecommerce-1.onrender.com"
+     "https://buy-more-ecommerce-1.onrender.com",
+     "https://buy-more-ecommerce-admin.onrender.com"
   ],
   credentials: true
 }));
